@@ -12,6 +12,7 @@ const app = express();
 export default app;
 dotenv.config({ path: './config/.env' });
 app.set("trust proxy", 1);
+console.log(process.env.GOOGLE_CLIENT_ID);
 
 // Middlewares
 app.use(session({

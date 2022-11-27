@@ -4,7 +4,7 @@ import { Strategy as Google } from 'passport-google-oauth20';
 
 export const connectPassport = () => {
     passport.use(new Google({
-        clientID: "255529611496-q3eg1ruvl1ha8numuj2i3mc6naolpfhs.apps.googleusercontent.com",
+        clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.Google_Client_Secret,
         callbackURL: process.env.Google_Callback_URL,
     },
