@@ -13,7 +13,7 @@ router.get("/auth/google", passport.authenticate("google", {
 }));
 
 router.get("/google/callback", passport.authenticate("google", {
-    successRedirect: "http://localhost:3000",
+    successRedirect: "https://btechburgerwala-tau.vercel.app",
 }));
 
 router.post("/contact", contactDetails);
