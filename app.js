@@ -20,9 +20,9 @@ app.use(session({
     cookie: {
         secure: true,
         httpOnly: true,
-        sameSite: 'none',
-
-    }));
+        sameSite: 'none'
+    }
+}));
 
 app.use(cookieParser());
 app.use(express.json());
