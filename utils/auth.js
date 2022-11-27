@@ -7,7 +7,6 @@ export const connectPassport = () => {
         clientID: process.env.Google_Client_ID,
         clientSecret: process.env.Google_Client_Secret,
         callbackURL: process.env.Google_Callback_URL,
-        passReqToCallback: true
     },
         async function (request, accessToken, refreshToken, profile, done) {
             const user = await User.findOne({
