@@ -1,7 +1,7 @@
 import express, { urlencoded } from 'express';
 import dotenv from 'dotenv';
 import { connectPassport } from './utils/auth.js';
-import session from 'cookie-session';
+import session from 'express-session';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import { errorMiddleware } from './middleware/errorMiddleware.js';
@@ -15,13 +15,15 @@ app.set("trust proxy", 1);
 
 // Middlewares
 app.use(session({
-    keys: [process.env.SESSION_SECRET],
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
 
     cookie: {
         secure: true,
         httpOnly: true,
-        sameSite: 'none'
-    }
+        sameSite: "none",
+    },
 }));
 
 app.use(cookieParser());
