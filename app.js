@@ -13,12 +13,14 @@ export default app;
 dotenv.config({ path: './config/.env' });
 
 // Middlewares
+app.set("trust proxy", 1);
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
 
     cookie: {
+        store: 'session',
         secure: process.env.NODE_ENV === "development" ? false : true,
         httpOnly: process.env.NODE_ENV === "development" ? false : true,
         sameSite: process.env.NODE_ENV === "development" ? false : "none",
@@ -38,7 +40,6 @@ app.use(
 app.use(passport.authenticate("session"));
 app.use(passport.initialize());
 app.use(passport.session());
-app.enable("trust proxy");
 
 
 // Google Passport Strategy
