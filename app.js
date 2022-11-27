@@ -11,9 +11,9 @@ import cors from 'cors';
 const app = express();
 export default app;
 dotenv.config({ path: './config/.env' });
+app.set("trust proxy", 1);
 
 // Middlewares
-app.set("trust proxy", 1);
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -21,9 +21,9 @@ app.use(session({
 
     cookie: {
         store: 'session',
-        secure: process.env.NODE_ENV === "development" ? false : true,
-        httpOnly: process.env.NODE_ENV === "development" ? false : true,
-        sameSite: process.env.NODE_ENV === "development" ? false : "none",
+        secure: true,
+        httpOnly: true,
+        sameSite: "none",
     },
 }));
 
