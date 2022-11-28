@@ -12,7 +12,6 @@ const app = express();
 export default app;
 dotenv.config({ path: './config/.env' });
 app.set("trust proxy", 1);
-console.log(process.env.GOOGLE_CLIENT_ID);
 
 // Middlewares
 app.use(session({
@@ -32,7 +31,7 @@ app.use(express.json());
 app.use(urlencoded({ extended: true }));
 app.use(
     cors({
-        origin: "https://btechburgerwala-tau.vercel.app",
+        origin: "https://btech-burger-wala.onrender.com",
         credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE"],
     })
