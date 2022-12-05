@@ -1,9 +1,9 @@
 import express, { urlencoded } from 'express';
 import dotenv from 'dotenv';
 import { connectPassport } from './utils/auth.js';
-import session from 'express-session';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
 import { errorMiddleware } from './middleware/errorMiddleware.js';
 import cors from 'cors';
 
@@ -11,21 +11,9 @@ import cors from 'cors';
 const app = express();
 export default app;
 dotenv.config({ path: './config/.env' });
-app.set("trust proxy", 1);
 
 // Middlewares
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-
-    cookie: {
-        secure: true,
-        httpOnly: true,
-        sameSite: "none",
-    },
-}));
-
+app.use(session({ secret: "cats", resave: true, saveUninitialized: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
