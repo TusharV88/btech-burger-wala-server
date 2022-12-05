@@ -13,7 +13,16 @@ export default app;
 dotenv.config({ path: './config/.env' });
 
 // Middlewares
-app.use(session({ secret: "cats", resave: true, saveUninitialized: true, cookie: { secure: true, httpOnly: true, sameSite: 'none' } }));
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: true,
+        httpOnly: true,
+        sameSite: 'none'
+    }
+}));
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Origin', "https://btech-burger-wala.onrender.com");
