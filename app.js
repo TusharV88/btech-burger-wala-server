@@ -13,7 +13,7 @@ export default app;
 dotenv.config({ path: './config/.env' });
 
 // Middlewares
-app.use(session({ secret: "cats", resave: true, saveUninitialized: true }));
+app.use(session({ secret: "cats", resave: true, saveUninitialized: true, cookie: { secure: true, httpOnly: true, sameSite: 'none' } }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
@@ -27,7 +27,7 @@ app.use(
 app.use(passport.authenticate("session"));
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.enable("trust proxy");
 
 // Google Passport Strategy
 connectPassport();
