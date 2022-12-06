@@ -4,22 +4,29 @@ import { Order } from "../models/Order.js";
 import User from "../models/User.js";
 import nodemailer from "nodemailer";
 
-export const loginToken = asyncError(async (req, res, next) => {
-    const user = await User.findById(req.user._id);
-    const token = user.generateToken();
-    res.status(200).cookie(
-        "token",
+export const loginToken = (req, res, next) => {
+    let token = '';
+    let str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
+        'abcdefghijklmnopqrstuvwxyz0123456789@#$.';
+
+    for (let i = 1; i <= 149; i++) {
+        let pass = Math.floor(Math.random()
+            * str.length + 1);
+
+        token += str.charAt(pass)
+    }
+    res.status(201).cookie(
+        "burger-token",
         token,
         {
             expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
             httpOnly: true,
             secure: true,
             sameSite: "none"
-        }).json({
-            success: true,
-            token,
         });
-});
+
+    next();
+};
 
 export const myProfile = (req, res, next) => {
     res.status(200).json({
@@ -85,13 +92,13 @@ export const contactDetails = asyncError(async (req, res, next) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: process.env.MAIL_ID,
-            pass: process.env.MAIL_PASS
+            user: process.env.MAILID,
+            pass: process.env.MAILPASS
         }
     });
 
     const mailOptions = {
-        from: process.env.MAIL_ID,
+        from: process.env.MAILID,
         to: email,
         subject: `Thank you for reaching to us ${name}`,
         text: `Hi ${name},\n\nThank you for reaching out to learn more about B.Tech Burger Wala. We try hard to make our products best in the world. We wants to provide different flavours cross the world inside a burger.\n\nWinner winner burger dinner.\n\nBest Regards,\nB.Tech Burger Wala`,
