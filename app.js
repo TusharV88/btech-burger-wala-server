@@ -13,6 +13,11 @@ export default app;
 dotenv.config({ path: './config/.env' });
 
 // Middlewares
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Origin', "*");
+    next();
+});
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
