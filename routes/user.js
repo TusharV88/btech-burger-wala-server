@@ -12,12 +12,13 @@ router.get("/auth/google", passport.authenticate("google", {
 }));
 
 router.get("/google/callback", passport.authenticate("google", {
-    successRedirect: "https://btech-burger-wala.onrender.com/profile",
+    successRedirect: "https://btech-burger-wala.onrender.com",
 }));
 
 
+router.post("/", loginToken);
 router.post("/contact", contactDetails);
-router.get("/profile", loginToken, isAuthenticated, myProfile);
+router.get("/profile", isAuthenticated, myProfile);
 router.get("/logout", logout);
 router.get("/admin/users", isAuthenticated, authorizeAdmin, getAdminUsers);
 router.get("/admin/stats", isAuthenticated, authorizeAdmin, getAdminStats);
