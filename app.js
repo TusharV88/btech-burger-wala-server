@@ -15,7 +15,9 @@ dotenv.config({ path: './config/.env' });
 // Middlewares
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Credentials', true);
-    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Origin', "https://btech-burger-wala.onrender.com");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
     next();
 });
 app.use(session({
@@ -25,7 +27,8 @@ app.use(session({
     cookie: {
         secure: true,
         httpOnly: true,
-        sameSite: 'none',
+        sameSite: 'None',
+        maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
     }
 }));
 app.use(cookieParser());
