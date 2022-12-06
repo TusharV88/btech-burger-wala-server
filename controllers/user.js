@@ -15,9 +15,10 @@ export const loginToken = asyncError(async (req, res, next) => {
             httpOnly: true,
             secure: true,
             sameSite: "none"
+        }).json({
+            success: true,
+            token,
         });
-
-    next();
 });
 
 export const myProfile = (req, res, next) => {

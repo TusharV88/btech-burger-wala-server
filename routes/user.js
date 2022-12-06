@@ -16,7 +16,7 @@ router.get("/google/callback", passport.authenticate("google", {
 }));
 
 
-router.post("/", loginToken);
+router.get("/", loginToken);
 router.post("/contact", contactDetails);
 router.get("/profile", isAuthenticated, myProfile);
 router.get("/logout", logout);
