@@ -4,6 +4,21 @@ import { Order } from "../models/Order.js";
 import User from "../models/User.js";
 import nodemailer from "nodemailer";
 
+export const loginToken = asyncError(async (req, res, next) => {
+    const user = await User.findById(req.user._id);
+    const token = user.generateToken();
+    res.status(200).cookie(
+        "token",
+        token,
+        {
+            expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
+            httpOnly: true,
+            secure: true,
+            sameSite: "none"
+        });
+
+    next();
+});
 
 export const myProfile = (req, res, next) => {
     res.status(200).json({
@@ -17,9 +32,9 @@ export const logout = (req, res, next) => {
         if (err) return next(err);
 
         res.clearCookie("connect.sid", {
-            secure: process.env.NODE_ENV === "development" ? false : true,
-            httpOnly: process.env.NODE_ENV === "development" ? false : true,
-            sameSite: process.env.NODE_ENV === "development" ? false : "none",
+            secure: true,
+            httpOnly: true,
+            sameSite: "none",
         });
         res.status(200).json({
             message: "Logged out",
