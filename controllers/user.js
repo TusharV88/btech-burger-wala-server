@@ -5,7 +5,6 @@ import User from "../models/User.js";
 import nodemailer from "nodemailer";
 
 export const loginToken = async (req, res, next) => {
-    console.log("Token User: " + req.user._id);
     const user = await User.findById(req.user._id);
     const token = user.generateToken();
     res.status(200).cookie(
@@ -16,12 +15,8 @@ export const loginToken = async (req, res, next) => {
             httpOnly: true,
             secure: true,
             sameSite: "none"
-        }).json({
-            success: true,
-            token
-        });
+        }).redirect("https://btech-burger-wala.onrender.com");
 
-    next();
 };
 
 export const myProfile = (req, res, next) => {
