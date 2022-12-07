@@ -5,8 +5,8 @@ import User from "../models/User.js";
 import nodemailer from "nodemailer";
 
 export const loginToken = async (req, res, next) => {
-    // const user = await User.findById(req.user._id);
-    // const token = user.generateToken();
+    const user = await User.findById(req.user._id);
+    const token = user.generateToken();
     // res.status(200).cookie(
     //     "burger-token",
     //     token,
@@ -20,7 +20,7 @@ export const loginToken = async (req, res, next) => {
     // console.log("Request Body User Id: " + req.user._id);
     // const user = await User.findByIdAndUpdate(req.user._id, { cookie: req.cookies["connect.sid"] });
     // console.log("User Cookie: " + user.cookie);
-    await User.findByIdAndUpdate(req.user._id, { cookie: req.cookies["connect.sid"] });
+    await User.findByIdAndUpdate(req.user._id, { cookie: token });
     next();
 };
 
