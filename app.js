@@ -17,11 +17,6 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: {
-        secure: true,
-        httpOnly: true,
-        sameSite: "none",
-    },
 }));
 app.use(cookieParser());
 app.use(express.json());
@@ -36,7 +31,6 @@ app.use(
 app.use(passport.authenticate("session"));
 app.use(passport.initialize());
 app.use(passport.session());
-app.enable("trust proxy");
 
 // Google Passport Strategy
 connectPassport();
