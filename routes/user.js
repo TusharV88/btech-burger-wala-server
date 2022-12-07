@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from 'passport';
-import { contactDetails, getAdminStats, getAdminUsers, loginToken, logout, myProfile } from '../controllers/user.js';
+import { contactDetails, getAdminStats, getAdminUsers, logout, myProfile } from '../controllers/user.js';
 import { authorizeAdmin, isAuthenticated } from '../middleware/auth.js';
 
 
