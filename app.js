@@ -13,16 +13,21 @@ export default app;
 dotenv.config({ path: './config/.env' });
 
 // Middlewares
-app.use(session({
+const sessionConfig = {
     secret: process.env.SESSION_SECRET,
+    name: 'burger-token',
     resave: false,
     saveUninitialized: false,
+    store: store,
     cookie: {
-        secure: true,
-        httpOnly: true,
-        sameSite: "none",
-    },
-}));
+        sameSite: 'strict', // THIS is the config you are looing for.
+    }
+};
+
+app.set('trust proxy', 1); // trust first proxy
+sessionConfig.cookie.secure = true; // serve secure cookies
+
+app.use(session(sessionConfig));
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "https://btech-burger-wala.onrender.com");
     res.header("Access-Control-Allow-Credentials", "true");
