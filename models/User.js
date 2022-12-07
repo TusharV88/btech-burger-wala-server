@@ -20,4 +20,8 @@ const UserSchema = new mongoose.Schema({
     }
 });
 
+UserSchema.methods.generateToken = function () {
+    return jwt.sign({ _id: this._id }, process.env.JWT_SECRET);
+};
+
 export default mongoose.model("User", UserSchema);

@@ -4,18 +4,11 @@ import { Order } from "../models/Order.js";
 import User from "../models/User.js";
 import nodemailer from "nodemailer";
 
-export const loginToken = (req, res, next) => {
-    let token = '';
-    let str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
-        'abcdefghijklmnopqrstuvwxyz0123456789@#$.';
-
-    for (let i = 1; i <= 149; i++) {
-        let pass = Math.floor(Math.random()
-            * str.length + 1);
-
-        token += str.charAt(pass)
-    }
-    res.status(201).cookie(
+export const loginToken = async (req, res, next) => {
+    console.log("Token User: " + req.user._id);
+    const user = await User.findById(req.user._id);
+    const token = user.generateToken();
+    res.status(200).cookie(
         "burger-token",
         token,
         {
@@ -25,7 +18,7 @@ export const loginToken = (req, res, next) => {
             sameSite: "none"
         });
 
-    next();
+        next();
 };
 
 export const myProfile = (req, res, next) => {

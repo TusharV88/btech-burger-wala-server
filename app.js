@@ -13,23 +13,16 @@ export default app;
 dotenv.config({ path: './config/.env' });
 
 // Middlewares
-const sessionConfig = {
+app.use(session({
     secret: process.env.SESSION_SECRET,
-    name: 'burger-token',
     resave: false,
     saveUninitialized: false,
     cookie: {
-        sameSite: 'strict',
-        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days.
+        secure: true,
         httpOnly: true,
-        secure: false,
-    }
-};
-
-app.set('trust proxy', 1); // trust first proxy
-sessionConfig.cookie.secure = true; // serve secure cookies
-
-app.use(session(sessionConfig));
+        sameSite: "none",
+    },
+}));
 app.use(cookieParser());
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
@@ -43,6 +36,7 @@ app.use(
 app.use(passport.authenticate("session"));
 app.use(passport.initialize());
 app.use(passport.session());
+app.enable("trust proxy");
 
 // Google Passport Strategy
 connectPassport();
