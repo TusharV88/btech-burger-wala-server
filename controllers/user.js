@@ -21,8 +21,7 @@ export const loginToken = async (req, res, next) => {
     const user = await User.findByIdAndUpdate(req.user._id, { cookie: req.cookies["connect.sid"] });
     console.log("User Cookie: " + user.cookie);
     await User.findByIdAndUpdate(req.user._id, { cookie: req.cookies["connect.sid"] });
-    res.redirect("https://btech-burger-wala.onrender.com");
-
+    next();
 };
 
 export const myProfile = (req, res, next) => {
