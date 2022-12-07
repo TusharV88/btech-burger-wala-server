@@ -3,12 +3,12 @@ import ErrorHandler from "../utils/ErrorHandler.js";
 
 
 export const isAuthenticated = async (req, res, next) => {
-    // console.log("Request Auth: " + req.user);
+    console.log("Request Auth: " + req.user);
     var token = "null";
     if (req.user !== undefined) {
         const user = await User.findById(req.user._id);
         token = user.cookie;
-        // console.log("Auth Token: " + token);
+        console.log("Auth Token: " + token);
     }
     if (token === "null") {
         return next(new ErrorHandler("Not Logged In", 401));
