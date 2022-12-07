@@ -20,8 +20,12 @@ export const connectPassport = () => {
                     googleId: profile.id,
                     cookie: "null"
                 });
+                // const user = await User.findByIdAndUpdate(req.newUser._id, { cookie: req.cookies["connect.sid"] });
+
+                // console.log("New User: " + user);
                 return done(null, newUser);
             } else {
+                console.log("User: " + user);
                 return done(null, user);
             }
         }));
