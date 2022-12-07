@@ -16,9 +16,7 @@ export const loginToken = async (req, res, next) => {
             httpOnly: true,
             secure: true,
             sameSite: "none"
-        });
-
-        next();
+        }).redirect("https://btech-burger-wala.onrender.com");
 };
 
 export const myProfile = (req, res, next) => {
