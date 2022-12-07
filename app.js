@@ -18,9 +18,12 @@ const sessionConfig = {
     name: 'burger-token',
     resave: false,
     saveUninitialized: false,
-    // store: store,
     cookie: {
-        sameSite: 'strict', // THIS is the config you are looing for.
+        sameSite: 'strict',
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days.
+        httpOnly: true,
+        secure: true,
+        path: 'https://btech-burger-wala.onrender.com',
     }
 };
 
