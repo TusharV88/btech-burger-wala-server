@@ -18,7 +18,7 @@ const sessionConfig = {
     name: 'burger-token',
     resave: false,
     saveUninitialized: false,
-    store: store,
+    // store: store,
     cookie: {
         sameSite: 'strict', // THIS is the config you are looing for.
     }
