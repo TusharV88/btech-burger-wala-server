@@ -22,7 +22,7 @@ const sessionConfig = {
         sameSite: 'strict',
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days.
         httpOnly: true,
-        secure: true,
+        secure: false,
     }
 };
 
@@ -30,13 +30,6 @@ app.set('trust proxy', 1); // trust first proxy
 sessionConfig.cookie.secure = true; // serve secure cookies
 
 app.use(session(sessionConfig));
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://btech-burger-wala.onrender.com");
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    next();
-});
 app.use(cookieParser());
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
@@ -50,7 +43,6 @@ app.use(
 app.use(passport.authenticate("session"));
 app.use(passport.initialize());
 app.use(passport.session());
-app.enable("trust proxy");
 
 // Google Passport Strategy
 connectPassport();
