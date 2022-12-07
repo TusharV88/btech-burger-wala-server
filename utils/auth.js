@@ -1,7 +1,6 @@
 import passport from 'passport';
 import User from '../models/User.js';
 import { Strategy as Google } from 'passport-google-oauth20';
-import { loginToken } from '../controllers/user.js';
 
 export const connectPassport = () => {
     passport.use(new Google({

@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from 'passport';
-import { contactDetails, getAdminStats, getAdminUsers, loginToken, logout, myProfile } from '../controllers/user.js';
+import { contactDetails, getAdminStats, getAdminUsers, logout, myProfile } from '../controllers/user.js';
 import { authorizeAdmin, isAuthenticated } from '../middleware/auth.js';
 
 
@@ -11,7 +11,7 @@ router.get("/auth/google", passport.authenticate("google", {
     scope: ["profile"],
 }));
 
-router.get("/google/callback", loginToken, passport.authenticate("google", {
+router.get("/google/callback", passport.authenticate("google", {
     successRedirect: "https://btech-burger-wala.onrender.com",
 }));
 
