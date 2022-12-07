@@ -13,6 +13,7 @@ router.get("/auth/google", passport.authenticate("google", {
 
 router.get("/google/callback", passport.authenticate("google"), loginToken, (req, res) => {
     res.redirect("https://btech-burger-wala.onrender.com");
+    next();
 });
 
 router.post("/contact", contactDetails);
