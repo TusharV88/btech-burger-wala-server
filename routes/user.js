@@ -12,7 +12,10 @@ router.get("/auth/google", passport.authenticate("google", {
 }));
 
 router.get("/google/callback", passport.authenticate("google"), loginToken);
-
+// router.get("/google/callback", passport.authenticate("google"), loginToken);
+// router.get("/login", (req, res, next) => {
+//     res.send("Loged in");
+// });
 router.post("/contact", contactDetails);
 router.get("/profile", isAuthenticated, myProfile);
 router.get("/logout", logout);
