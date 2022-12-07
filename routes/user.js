@@ -11,7 +11,7 @@ router.get("/auth/google", passport.authenticate("google", {
     scope: ["profile"],
 }));
 
-router.get("/google/callback", passport.authenticate("google"), loginToken, (req, res) => { res.redirect("https://btech-burger-wala.onrender.com"); });
+router.get("/google/callback", passport.authenticate("google"), loginToken);
 
 router.post("/contact", contactDetails);
 router.get("/profile", isAuthenticated, myProfile);

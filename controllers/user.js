@@ -7,15 +7,16 @@ import nodemailer from "nodemailer";
 export const loginToken = async (req, res, next) => {
     const user = await User.findById(req.user._id);
     const token = user.generateToken();
-    res.status(200).cookie(
-        "burger-token",
-        token,
-        {
-            expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
-            httpOnly: true,
-            secure: true,
-            sameSite: "none"
-        });
+    // res.status(200).cookie(
+    //     "burger-token",
+    //     token,
+    //     {
+    //         expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
+    //         httpOnly: true,
+    //         secure: true,
+    //         sameSite: "none",
+    //     }).redirect= "https://btech-burger-wala.onrender.com";
+    res.redirect("https://btech-burger-wala.onrender.com");
 
 };
 
