@@ -12,7 +12,7 @@ router.get("/auth/google", passport.authenticate("google", {
 }));
 
 router.get("/google/callback", passport.authenticate("google", {
-    successRedirect: "http://localhost:3000",
+    successRedirect: "https://btech-burger-wala.onrender.com",
 }));
 router.post("/contact", contactDetails);
 router.get("/profile", isAuthenticated, myProfile);
