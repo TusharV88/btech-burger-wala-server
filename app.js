@@ -13,10 +13,17 @@ export default app;
 dotenv.config({ path: './config/.env' });
 
 // Middlewares
+app.set("trust proxy", 1);
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 120,
+        sameSite: "none",
+        secure: true,
+        httpOnly: true
+    }
 }));
 app.use(cookieParser());
 app.use(express.json());

@@ -4,25 +4,6 @@ import { Order } from "../models/Order.js";
 import User from "../models/User.js";
 import nodemailer from "nodemailer";
 
-// export const loginToken = async (req, res, next) => {
-//     const user = await User.findById(req.user._id);
-//     const token = user.generateToken();
-    // res.status(200).cookie(
-    //     "burger-token",
-    //     token,
-    //     {
-    //         expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
-    //         httpOnly: true,
-    //         secure: true,
-    //         sameSite: "none",
-    //     }).redirect= "https://btech-burger-wala.onrender.com";
-    // console.log("Request Body Cookie: " + req.cookies["connect.sid"]);
-    // console.log("Request Body User Id: " + req.user._id);
-    // const user = await User.findByIdAndUpdate(req.user._id, { cookie: req.cookies["connect.sid"] });
-    // console.log("User Cookie: " + user.cookie);
-//     await User.findByIdAndUpdate(req.user._id, { cookie: token });
-//     next();
-// };
 
 export const myProfile = (req, res, next) => {
     res.status(200).json({

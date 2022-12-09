@@ -20,14 +20,8 @@ export const connectPassport = () => {
                     googleId: profile.id,
                     cookie: "null"
                 });
-                // console.log("New User: " + user);
-                const token = newUser.generateToken();
-                await User.findByIdAndUpdate(req.newUser._id, { cookie: token });
                 return done(null, newUser);
             } else {
-                // console.log("User: " + user);
-                const token = newUser.generateToken();
-                await User.findByIdAndUpdate(req.user._id, { cookie: token });
                 return done(null, user);
             }
         }));
