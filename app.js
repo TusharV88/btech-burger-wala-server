@@ -20,7 +20,7 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         sameSite: "none",
-        secure: false,
+        secure: true,
         httpOnly: false
     }
 }));
