@@ -25,10 +25,6 @@ export const connectPassport = () => {
                 return done(null, user);
             }
         }));
-        (req, res) => {
-            console.log("Request:" + req.user);
-            res.session.cookie = req.user.cookie;
-        };
 
     passport.serializeUser((user, done) => {
         done(null, user.id);

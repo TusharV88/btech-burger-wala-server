@@ -19,7 +19,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        sameSite: "lax",
+        sameSite: "none",
         secure: true,
         httpOnly: true,
         path: "/",
