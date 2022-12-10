@@ -4,6 +4,7 @@ export const isAuthenticated = async (req, res, next) => {
     const token = req.cookies["connect.sid"];
     console.log("Auth Token: " + token);
     if (!token) {
+        console.log("Not Logged In");
         return next(new ErrorHandler("Not Logged In", 401));
     }
     next();

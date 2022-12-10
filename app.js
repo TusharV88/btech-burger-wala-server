@@ -17,27 +17,20 @@ app.set("trust proxy", 1);
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
-        sameSite: "none",
-        maxAge: 1000 * 60 * 60 * 24 * 7,
+        sameSite: "lax",
         secure: true,
-        httpOnly: false
+        httpOnly: true,
+        path: "/",
     }
 }));
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://btech-burger-wala.onrender.com");
-    res.header("Access-Control-Allow-Credentials", true);
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
 app.use(cookieParser());
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
 app.use(
     cors({
-        origin: "https://btech-burger-wala.onrender.com",
+        origin: "http://localhost:4000",
         credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE"],
     })
