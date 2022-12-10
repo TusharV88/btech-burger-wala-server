@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(urlencoded({ extended: true }));
 app.use(
     cors({
-        origin: "http://localhost:4000",
+        origin: "https://btech-burger-wala.onrender.com",
         credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE"],
     })
