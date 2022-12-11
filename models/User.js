@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const UserSchema = new mongoose.Schema({
     name: String,
     photo: String,
-    cookie: String,
     googleId: {
         type: String,
         required: true,

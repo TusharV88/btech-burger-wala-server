@@ -18,7 +18,6 @@ export const connectPassport = () => {
                     name: profile.displayName,
                     photo: profile.photos[0].value,
                     googleId: profile.id,
-                    cookie: "null"
                 });
                 return done(null, newUser);
             } else {
@@ -34,7 +33,5 @@ export const connectPassport = () => {
         const user = await User.findById(id);
         done(null, user);
     });
-
-
 };
 
