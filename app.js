@@ -22,7 +22,6 @@ app.use(session({
         sameSite: "none",
         secure: true,
         httpOnly: true,
-        path: "/",
     }
 }));
 app.use(cookieParser());
