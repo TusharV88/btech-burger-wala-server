@@ -4,7 +4,7 @@ import User from "../models/User.js";
 import cloudinary from "cloudinary";
 import { sendEmail } from "../middleware/sendEmail.js";
 import crypto from "crypto";
-import Contact from "../models/Contact.js";
+import { Contact } from "../models/Contact.js";
 
 export const register = async (req, res) => {
     try {
@@ -275,7 +275,7 @@ export const contactDetails = asyncError(async (req, res, next) => {
         await sendEmail({
             email,
             subject: `Thank you for reaching to us ${name}`,
-            msg 
+            msg
         });
 
         res.status(200).json({
