@@ -1,9 +1,6 @@
 import express, { urlencoded } from 'express';
 import dotenv from 'dotenv';
-import { connectPassport } from './utils/auth.js';
-import passport from 'passport';
 import cookieParser from 'cookie-parser';
-import session from 'express-session';
 import { errorMiddleware } from './middleware/errorMiddleware.js';
 import cors from 'cors';
 
@@ -13,17 +10,6 @@ export default app;
 dotenv.config({ path: './config/.env' });
 
 // Middlewares
-app.set("trust proxy", 1);
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        sameSite: "none",
-        secure: true,
-        httpOnly: true,
-    }
-}));
 app.use(cookieParser());
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
@@ -34,12 +20,6 @@ app.use(
         methods: ["GET", "POST", "PUT", "DELETE"],
     })
 );
-app.use(passport.authenticate("session"));
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Google Passport Strategy
-connectPassport();
 
 // Routes
 import userRoute from './routes/user.js';

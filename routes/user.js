@@ -1,19 +1,16 @@
 import express from 'express';
-import passport from 'passport';
-import { contactDetails, getAdminStats, getAdminUsers, logout, myProfile } from '../controllers/user.js';
+import { contactDetails, forgotPassword, getAdminStats, getAdminUsers, login, logout, myProfile, register, resetPassword } from '../controllers/user.js';
 import { authorizeAdmin, isAuthenticated } from '../middleware/auth.js';
 
 
 const router = express.Router();
 
 
-router.get("/auth/google", passport.authenticate("google", {
-    scope: ["profile"],
-}));
 
-router.get("/google/callback", passport.authenticate("google", {
-    successRedirect: "https://btech-burger-wala.onrender.com",
-}));
+router.post("/register", register);
+router.post("/login", login);
+router.post("/forgot/password", forgotPassword);
+router.put("/password/reset/:token", resetPassword);
 router.post("/contact", contactDetails);
 router.get("/profile", isAuthenticated, myProfile);
 router.get("/logout", logout);
