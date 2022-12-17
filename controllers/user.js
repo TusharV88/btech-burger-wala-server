@@ -4,6 +4,7 @@ import User from "../models/User.js";
 import cloudinary from "cloudinary";
 import { sendEmail } from "../middleware/sendEmail.js";
 import crypto from "crypto";
+import Contact from "../models/Contact.js";
 
 export const register = async (req, res) => {
     try {
@@ -261,14 +262,20 @@ export const getAdminStats = asyncError(async (req, res, next) => {
 });
 
 export const contactDetails = asyncError(async (req, res, next) => {
-    const { name, email } = req.body;
-    const message = `Hi ${name},\n\nThank you for reaching out to learn more about B.Tech Burger Wala. We try hard to make our products best in the world. We wants to provide different flavours cross the world inside a burger.\n\nWinner winner burger dinner.\n\nBest Regards,\nB.Tech Burger Wala`;
+    const { name, email, message } = req.body;
+    await Contact.create({
+        name,
+        email,
+        message,
+    });
+
+    const msg = `Hi ${name},\n\nThank you for reaching out to learn more about B.Tech Burger Wala. We try hard to make our products best in the world. We wants to provide different flavours cross the world inside a burger.\n\nWinner winner burger dinner.\n\nBest Regards,\nB.Tech Burger Wala`;
 
     try {
         await sendEmail({
             email,
             subject: `Thank you for reaching to us ${name}`,
-            message 
+            msg 
         });
 
         res.status(200).json({
