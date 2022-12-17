@@ -273,7 +273,7 @@ export const contactDetails = asyncError(async (req, res, next) => {
 
         res.status(200).json({
             success: true,
-            message: "Received your message. We will contact you soon.",
+            message: "Received your message. Please check your email for more details.",
         });
 
     } catch (error) {
