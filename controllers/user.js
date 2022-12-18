@@ -19,6 +19,7 @@ export const register = async (req, res) => {
             });
         }
 
+
         const myCloud = await cloudinary.v2.uploader.upload(avatar, { folder: "avatars" });
 
         user = await User.create({
