@@ -8,12 +8,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please enter a name"],
     },
-
-    avatar: {
-        public_id: String,
-        url: String,
-    },
-
     email: {
         type: String,
         required: [true, "Please enter an email"],
@@ -25,9 +19,12 @@ const UserSchema = new mongoose.Schema({
         minlength: [6, "Password must be at least 6 characters"],
         select: false,
     },
+    avatar: {
+        public_id: String,
+        url: String,
+    },
     role: {
         type: String,
-        enum: ["user", "admin"],
         default: "admin",
     },
     createdAt: {
