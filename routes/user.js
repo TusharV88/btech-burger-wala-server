@@ -5,13 +5,8 @@ import { authorizeAdmin, isAuthenticated } from '../middleware/auth.js';
 
 const router = express.Router();
 
-const routerHeader = (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://btech-burger-wala.onrender.com");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-};
 
-router.post("/register", routerHeader, register);
+router.post("/register", register);
 router.post("/login", login);
 router.post("/forgot/password", forgotPassword);
 router.put("/password/reset/:token", resetPassword);
